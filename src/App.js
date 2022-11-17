@@ -26,14 +26,14 @@ const App = () => {
   const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const noteFormRef = useRef()
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    
+
     try {
       const user = await loginService.login({
         username, password,
@@ -63,7 +63,7 @@ const App = () => {
           handlePasswordChange={({ target }) => setPassword(target.value)}
           handleSubmit={handleLogin}
         />
-    </Togglable>
+      </Togglable>
     )
   }
 
@@ -93,7 +93,7 @@ const App = () => {
     noteFormRef.current.toggleVisibility()
     noteService
       .create(noteObject)
-      .then(returnedNote => {     
+      .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
       })
   }
@@ -108,13 +108,13 @@ const App = () => {
       content: note.content,
       important: !note.important,
     }
-  
+
     noteService
       .update(id, changedNote)
       .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
-      .catch(error => {
+      .catch(() => {
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
         )
@@ -132,11 +132,11 @@ const App = () => {
       <Notification message={errorMessage} />
 
       {user === null ?
-      loginForm() :
-      <div>
-        <p>{user.name} logged-in</p>
-        {noteForm()}
-      </div>
+        loginForm() :
+        <div>
+          <p>{user.name} logged-in</p>
+          {noteForm()}
+        </div>
       }
 
       <div>
@@ -145,10 +145,10 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note, i) => 
+        {notesToShow.map((note, i) =>
           <Note
             key={i}
-            note={note} 
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
         )}
