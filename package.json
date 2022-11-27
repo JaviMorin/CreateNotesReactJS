@@ -18,7 +18,7 @@
     "eject": "react-scripts eject",
     "server": "json-server -p3001 --watch db.json",
     "eslint": "eslint .",
-    "pruebas": "CI=true npm test -- --coverage"
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "cypress": "^11.2.0",
     "eslint-plugin-jest": "^27.1.5",
     "json-server": "^0.17.0"
   }
